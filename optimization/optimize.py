@@ -1,11 +1,12 @@
 import csv
 import copy
+import math
 
 def main():
     # Load the data from CSV
-    fileName = input("CSV to load data from: ")
+    #fileName = input("CSV to load data from: ")
 
-    with open(fileName, 'r') as file:
+    with open("config_2.csv", 'r') as file:
         csv_reader = csv.DictReader(file)
         data = [row for row in csv_reader]
 
@@ -48,10 +49,41 @@ def main():
     done = False
     while done == False:
         neighbours = find_neighbours(data, arrangement)
+    
+        # Calculate the cost of all neighbours and find the smallest cost
         costs = []
+        min_cost = math.inf
         for x in neighbours:
-            costs.append(cost(data,x, target, co2Coef))
-        min_cost = min(costs)
+            current_cost = cost(data,x, target, co2Coef)
+            costs.append(current_cost)
+            min_cost = min(min_cost, current_cost)
+
+        # Find the arrangement with the smallest cost (optimal neighbour)
+        if min_cost < cost(data, arrangement, target, co2Coef):
+            for x in range(len(costs)):
+                if costs[x] == min_cost:
+                    arrangement = copy.deepcopy(neighbours[x])
+        else:
+            done = True
+
+    # Calculate performance of the solution given
+    production = 0
+    co2 = 0
+    price = 0
+    for x in range(len(data)):
+        if arrangement[x]["activity"] == True:
+            production += data[x]["producción"]
+            co2 += data[x]["co2"]
+            price += data[x]["precio"]
+    difference = production - target
+    co2_per_kwh = co2/production
+    price_per_kwh = price/production
+    print("Difference between production and target = "+ str(difference))
+    print("CO2 per kWH = " + str(co2_per_kwh) + " kCO2-eq/kWh")
+    print("Price per kWH = " + str(price_per_kwh) + " Euros/kWh")
+    # print(arrangement)
+    print("Cost of solution = " + str(min_cost))
+
 
 
 def cost(data, arrangement, target, co2Coef):
@@ -59,11 +91,11 @@ def cost(data, arrangement, target, co2Coef):
     production = 0
     co2 = 0
     price = 0
-    for x in arrangement:
-        if x["activity"] == True:
-            production += data[x["id"]]["producción"]
-            co2 += data[x["id"]]["co2"]
-            price += data[x["id"]]["price"]
+    for x in range(len(data)):
+        if arrangement[x]["activity"] == True:
+            production += data[x]["producción"]
+            co2 += data[x]["co2"]
+            price += data[x]["precio"]
 
     productionCost = 10 * max(0,(target - production))
     co2Cost = co2Coef * co2
