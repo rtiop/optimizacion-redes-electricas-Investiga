@@ -4,9 +4,9 @@ import math
 
 def main():
     # Load the data from CSV
-    #fileName = input("CSV to load data from: ")
+    fileName = input("CSV to load data from: ")
 
-    with open("config_2.csv", 'r') as file:
+    with open(fileName, 'r') as file:
         csv_reader = csv.DictReader(file)
         data = [row for row in csv_reader]
 

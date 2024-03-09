@@ -5,9 +5,9 @@ from random import choice
 
 def main():
     # Load the data from CSV
-    #fileName = input("CSV to load data from: ")
+    fileName = input("CSV to load data from: ")
 
-    with open("config_2.csv", 'r') as file:
+    with open(fileName, 'r') as file:
         csv_reader = csv.DictReader(file)
         data = [row for row in csv_reader]
 
@@ -37,8 +37,7 @@ def main():
     co2Coef = max(0,float(input("Coeficient for CO2 cost (min 0): ")))
 
     # Get number of tries
-    #tries = int(input("Number of tries: "))
-    tries = 10000
+    tries = int(input("Number of tries: "))
 
     prices = []
     co2s = []
