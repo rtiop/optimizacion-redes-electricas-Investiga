@@ -1,2 +1,4 @@
-# Optimización y análisis 
-Repositorio con dos partes: la primera es un programa que optimiza un sistema eléctrico simulado para producir la energía necesaria y reducir las emisiones de gases de efecto invernadero y la segunda un análisis de regresión lineal que relaciona factore(s) meteorológicos a la produción de electricidad de un aerogenerador.
+# Optimización de redes eléctricas 
+Repositorio con el objetivo de investigar como utilizar lenguages de programación y técnicas de optimización matemática para calcular la disposición ideal de un conjunto de centrales eléctricas para minimizar la cantidad de gases de efecto invernadero emitidos a la vez que se cumplen otros requisitos. Hay un programa que utiliza _hill-climbing_ y otro que utliza la técnica de _simulated annealing_.
+
+Hecho para Investiga 2024 por Emilio N. Paredes
