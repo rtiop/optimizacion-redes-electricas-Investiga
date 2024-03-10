@@ -5,9 +5,9 @@ from random import choice, random
 
 def main():
     # Load the data from CSV
-    #fileName = input("CSV to load data from: ")
+    fileName = input("CSV to load data from: ")
 
-    with open("config_1.csv", 'r') as file:
+    with open(fileName, 'r') as file:
         csv_reader = csv.DictReader(file)
         data = [row for row in csv_reader]
 
@@ -71,12 +71,10 @@ def main():
         elif random() < temperature/max_temperature:
             arrangement = random_arrangement(data)
             temperature = max(1, temperature-1)
-            print(temperature)
         else:
             done = True
         if cost(data, best_arrangement, target, co2Coef) > cost(data, arrangement, target, co2Coef):
             best_arrangement = copy.deepcopy(arrangement)
-        print(cost(data, best_arrangement,target,co2Coef))
                 
 
     # Calculate performance of the solution given

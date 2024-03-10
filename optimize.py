@@ -81,7 +81,7 @@ def main():
     print("Difference between production and target = "+ str(difference))
     print("CO2 per kWH = " + str(co2_per_kwh) + " kCO2-eq/kWh")
     print("Price per kWH = " + str(price_per_kwh) + " Euros/kWh")
-    # print(arrangement)
+    print(arrangement)
     print("Cost of solution = " + str(min_cost))
 
 
